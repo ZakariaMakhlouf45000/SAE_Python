@@ -83,10 +83,12 @@ def total_admis_presents(liste_resultats):
     Returns:
         tuple : un couple d'entiers contenant le nombre total de candidats admis et prēsents
     """
-    couple = ()
-
+    nombre_totale = 0
+    nompbre_present = 0
     for i in range(len(liste_resultats)):
-
+        nombre_totale += liste_resultats[i][4]
+        nompbre_present += liste_resultats[i][3]
+    return (nombre_totale,nompbre_present)
 
 
 def filtre_session(liste_resultats, session):
@@ -99,7 +101,14 @@ def filtre_session(liste_resultats, session):
     Returns:
         list: la sous-liste de liste_resultats, restreinte aux résultats de la session demandēe
     """
-    pass
+    sous_liste = []
+    for resultat in liste_resultats:
+        if resultat[0] == session:
+            sous_liste.append(resultat)
+    return sous_liste
+
+
+
 
 
 def filtre_departement(liste_resultats, departement):
