@@ -142,7 +142,12 @@ def filtre_college(liste_resultats, nom, departement):
     """
     sous_liste = []
     for i in range(len(liste_resultats)):
-
+        nom_College = liste_resultats[i][1] 
+        depart = liste_resultats[i][2]
+        if depart == departement :
+            if  nom.lower() in nom_College.lower()  :
+                sous_liste.append(liste_resultats[i])
+    return sous_liste
 
 def taux_reussite_global(liste_resultats, session):
     """calcule le taux (pourcentage) de réussite au DNB sur l'ensemble des collèges pour une session donnée
