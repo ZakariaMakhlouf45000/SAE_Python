@@ -102,9 +102,9 @@ def filtre_session(liste_resultats, session):
         list: la sous-liste de liste_resultats, restreinte aux résultats de la session demandēe
     """
     sous_liste = []
-    for resultat in liste_resultats:
-        if resultat[0] == session:
-            sous_liste.append(resultat)
+    for i in range(len(liste_resultats)):
+        if liste_resultats[i][0] == session:
+            sous_liste.append(liste_resultats[i])
     return sous_liste
 
 
@@ -121,7 +121,12 @@ def filtre_departement(liste_resultats, departement):
     Returns:
         list: la sous-liste de liste_resultats, restreinte aux résultats du dēpartement demandé
     """
-    pass
+    sous_liste = []
+    for i in range(len(liste_resultats)):
+        if liste_resultats[i][2] == departement:
+            sous_liste.append(liste_resultats[i])
+
+    return sous_liste
 
 
 def filtre_college(liste_resultats, nom, departement):
@@ -135,7 +140,8 @@ def filtre_college(liste_resultats, nom, departement):
     Returns:
         list: la sous-liste de liste_resultats, restreinte aux résultats du collège et du département recherchēs
     """
-    pass
+    sous_liste = []
+    for i in range(len(liste_resultats)):
 
 
 def taux_reussite_global(liste_resultats, session):
