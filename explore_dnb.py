@@ -14,7 +14,7 @@ def taux_reussite(resultat):
     """
     admis = resultat[3]
     present = resultat[4]
-    pourcentage =(admis / present)*100 
+    pourcentage =(present / admis)*100 
     return pourcentage
 
 
@@ -27,8 +27,15 @@ def meilleur(resultat1, resultat2):
 
     Returns:
         bool:   True si le taux de réussite de resultat1 est supérieur ā celui de resultat2
-    """    
-    pass
+    """
+    le_meilleur = False
+
+    p1 = (resultat1[4] / resultat1[3])
+    p2 = (resultat2[4] / resultat2[3]) 
+    if p1 > p2 :
+         le_meilleur =True
+    return le_meilleur
+
 
 
 def meilleur_taux_reussite(liste_resultats):
@@ -40,7 +47,13 @@ def meilleur_taux_reussite(liste_resultats):
     Returns:
         float: le meilleur taux de rēussite
     """
-    pass
+    meilleur = (liste_resultats[0][4]/ liste_resultats[0][3])*100
+    for i in range(len(liste_resultats)):
+        taux = liste_resultats[i][4]/ liste_resultats[i][3]*100
+        if taux > meilleur :
+            meilleur = taux
+    return meilleur
+
 
 
 def pire_taux_reussite(liste_resultats):
@@ -52,7 +65,13 @@ def pire_taux_reussite(liste_resultats):
     Returns:
         float: le pire taux de rēussite
     """
-    pass
+    pire = (liste_resultats[0][4]/ liste_resultats[0][3])*100
+    for i in range(len(liste_resultats)):
+        taux = (liste_resultats[i][4]/ liste_resultats[i][3])*100
+        if taux < pire :
+            pire = taux
+    return pire
+    
 
 
 def total_admis_presents(liste_resultats):
@@ -60,11 +79,14 @@ def total_admis_presents(liste_resultats):
 
     Args:
         liste_resultats (list): une liste de résultats
-
+    session , patronyme, departement, nombre_de_presents, nombre_total_d_admis
     Returns:
         tuple : un couple d'entiers contenant le nombre total de candidats admis et prēsents
     """
-    pass
+    couple = ()
+
+    for i in range(len(liste_resultats)):
+
 
 
 def filtre_session(liste_resultats, session):
