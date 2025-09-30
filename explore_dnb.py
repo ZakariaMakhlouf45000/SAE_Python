@@ -12,7 +12,10 @@ def taux_reussite(resultat):
     Returns:
         float:  le pourcentage de réussite (nb. admis / nb. présents ā la session)
     """
-    return
+    admis = resultat[3]
+    present = resultat[4]
+    pourcentage =(admis / present)*100 
+    return pourcentage
 
 
 def meilleur(resultat1, resultat2):
