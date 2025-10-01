@@ -193,20 +193,33 @@ def moyenne_taux_reussite_college(liste_resultats, nom, departement):
     for i in range(len(liste_resultats)):
         nom_College = liste_resultats[i][1]
         dept = liste_resultats[i][2]
-
-        nombre_session += 1
-        if  nom.lower() in nom_College.lower() and dept == departement: 
+        if  nom in nom_College and dept == departement: 
             total_ad = liste_resultats[i][4]
             total_present = liste_resultats[i][3]
             total_pourcentage += (total_ad / total_present * 100)
             nombre_session += 1
 
         
-    return (total_ad / total_present * 100) / nombre_session
+    return total_pourcentage / nombre_session
         
      
-
-
+liste2 = [(2020, 'ALBERT SIDOISNE', 28, 134, 118),
+          (2020, 'ANATOLE FRANCE', 28, 63, 47),
+          (2020, 'DE NERMONT - CHATEAUDUN', 28, 74, 60),
+          (2020, 'DE NERMONT - NOGENT', 28, 28, 27),
+          (2020, 'EMILE ZOLA', 28, 103, 88),
+          (2020, 'GILBERT COURTOIS', 28, 22, 18),
+          (2020, 'MATHURIN REGNIER', 28, 152, 118),
+          (2021, 'DE BEAUMONT LES AUTELS', 28, 37, 34),
+          (2021, 'DE NERMONT - CHATEAUDUN', 28, 71, 60),
+          (2021, 'EMILE ZOLA', 28, 96, 85),
+          (2021, 'GILBERT COURTOIS', 28, 24, 15),
+          (2021, 'JEAN MONNET', 28, 97, 91),
+          (2021, 'LA PAJOTTERIE', 28, 91, 72),
+          (2021, 'ND - LA LOUPE', 28, 12, 9),
+          (2021, 'PIERRE BROSSOLETTE', 28, 93, 70),
+          (2021, 'SULLY', 28, 14, 10),
+          ]
 
 def meilleur_college(liste_resultats, session):
     """recherche le collège ayant obtenu le meilleur taux de réussite pour une session donnée
@@ -218,7 +231,27 @@ def meilleur_college(liste_resultats, session):
     Returns:
         tuple: couple contenant le nom du collège et le dēpartement
     """
-    
+    meilleurTaux = -1
+    meilleurNom = None
+    meilleurDep = None
+
+    for i in range(len(liste_resultats)):
+        if liste_resultats[i][0] == session:
+            nom = liste_resultats[i][1]
+            depart = liste_resultats[i][2]
+            present = liste_resultats[i][3]
+            admis = liste_resultats[i][4]
+            tauxReussite = (admis / present) * 100
+            if tauxReussite > meilleurTaux:
+                meilleurTaux = tauxReussite
+                meilleurNom = nom
+                meilleurDep = depart
+    if meilleurNom is None :
+        if meilleurDep is None :
+            return None
+    return meilleurNom , meilleurDep
+print(meilleur_college(liste2,2021))
+
 
 
 def liste_sessions(liste_resultats):
