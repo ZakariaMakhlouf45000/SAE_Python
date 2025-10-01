@@ -218,7 +218,7 @@ def meilleur_college(liste_resultats, session):
     Returns:
         tuple: couple contenant le nom du collège et le dēpartement
     """
-    pass
+    
 
 
 def liste_sessions(liste_resultats):
