@@ -264,7 +264,7 @@ def liste_sessions(liste_resultats):
     Returns:
         list: une liste de session (int) triēe et sans doublons
     """    
-    pass
+     
 
 
 def plus_longe_periode_amelioration(liste_resultats):
