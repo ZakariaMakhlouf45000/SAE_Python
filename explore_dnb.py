@@ -155,11 +155,23 @@ def taux_reussite_global(liste_resultats, session):
     Args:
         liste_resultats (list): une liste de résultats
         session (int) : une session (année)
-        
+        session, patronyme, departement, nombre_de_presents, nombre_total_d_admis
     Returns:
         float: taux (pourcentage) de réussite au DNB sur l'ensemble des collèges pour une session donnēes
     """
-    pass
+    total_ad = 0
+    total_present = 0
+
+    for i in range(len(liste_resultats)):
+
+        if liste_resultats[i][0] == session:
+            total_ad += liste_resultats[i][4]
+            total_present += liste_resultats[i][3]
+        else :
+              return None
+     
+    return total_ad / total_present * 100 
+
 
 
 def moyenne_taux_reussite_college(liste_resultats, nom, departement):
@@ -173,7 +185,27 @@ def moyenne_taux_reussite_college(liste_resultats, nom, departement):
     Returns:
         float: moyenne des taux de rēussite d'un collège sur l'ensemble des sessions
     """
-    pass
+    total_ad = 0
+    total_present = 0
+    nombre_session = 0
+    total_pourcentage = 0
+
+    for i in range(len(liste_resultats)):
+        nom_College = liste_resultats[i][1]
+        dept = liste_resultats[i][2]
+
+        nombre_session += 1
+        if  nom.lower() in nom_College.lower() and dept == departement: 
+            total_ad = liste_resultats[i][4]
+            total_present = liste_resultats[i][3]
+            total_pourcentage += (total_ad / total_present * 100)
+            nombre_session += 1
+
+        
+    return (total_ad / total_present * 100) / nombre_session
+        
+     
+
 
 
 def meilleur_college(liste_resultats, session):
