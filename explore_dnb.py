@@ -14,7 +14,6 @@ def taux_reussite(resultat):
     """
     return resultat[4] /  resultat[3] *100
 
-
 def meilleur(resultat1, resultat2):
     """vérifie si resultat1 est meilleur que resultat2 au sens des taux de réussites
 
@@ -28,8 +27,6 @@ def meilleur(resultat1, resultat2):
    
     return taux_reussite(resultat1) > taux_reussite(resultat2)
 
-
-
 def meilleur_taux_reussite(liste_resultats):
     """recherche le meilleur taux de réussite dans une liste de résultats
 
@@ -42,13 +39,12 @@ def meilleur_taux_reussite(liste_resultats):
     if liste_resultats == []:
         return None
     
-    meilleurTaux = taux_reussite(liste_resultats[0])
-    
+    meilleurTaux = liste_resultats[0]
+
     for elem in liste_resultats:
-        taux = taux_reussite(elem)
-        if taux > meilleurTaux :
-            meilleurTaux = taux
-    return meilleurTaux
+        if meilleur(elem,meilleurTaux):
+            meilleurTaux = elem
+    return taux_reussite(meilleurTaux)
 
 
 
