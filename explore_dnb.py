@@ -12,10 +12,7 @@ def taux_reussite(resultat):
     Returns:
         float:  le pourcentage de réussite (nb. admis / nb. présents ā la session)
     """
-    admis = resultat[3]
-    present = resultat[4]
-    pourcentage =(present / admis)*100 
-    return pourcentage
+    return resultat[4] /  resultat[3] *100
 
 
 def meilleur(resultat1, resultat2):
@@ -28,13 +25,8 @@ def meilleur(resultat1, resultat2):
     Returns:
         bool:   True si le taux de réussite de resultat1 est supérieur ā celui de resultat2
     """
-    le_meilleur = False
-
-    p1 = (resultat1[4] / resultat1[3])
-    p2 = (resultat2[4] / resultat2[3]) 
-    if p1 > p2 :
-         le_meilleur =True
-    return le_meilleur
+   
+    return taux_reussite(resultat1) > taux_reussite(resultat2)
 
 
 
@@ -47,12 +39,16 @@ def meilleur_taux_reussite(liste_resultats):
     Returns:
         float: le meilleur taux de rēussite
     """
-    meilleur = (liste_resultats[0][4]/ liste_resultats[0][3])*100
-    for i in range(len(liste_resultats)):
-        taux = liste_resultats[i][4]/ liste_resultats[i][3]*100
-        if taux > meilleur :
-            meilleur = taux
-    return meilleur
+    if liste_resultats == []:
+        return None
+    
+    meilleurTaux = taux_reussite(liste_resultats[0])
+    
+    for elem in liste_resultats:
+        taux = taux_reussite(elem)
+        if taux > meilleurTaux :
+            meilleurTaux = taux
+    return meilleurTaux
 
 
 
