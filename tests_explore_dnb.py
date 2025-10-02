@@ -22,6 +22,8 @@ def test_meilleur():
 def test_meilleur_taux_reussite():
     assert dnb.meilleur_taux_reussite(liste2) == 27/28*100
     assert dnb.meilleur_taux_reussite(liste3) == 1.0*100
+    assert dnb.meilleur_taux_reussite([]) == None
+    assert dnb.meilleur_taux_reussite(liste4) == 109/115*100
 
 
 def test_pire_taux_reussite():
