@@ -12,7 +12,9 @@ def taux_reussite(resultat):
     Returns:
         float:  le pourcentage de réussite (nb. admis / nb. présents ā la session)
     """
-    return resultat[4] /  resultat[3] *100
+    if not resultat :
+        return None
+    return resultat[4] /  resultat[3] *100 
 
 def meilleur(resultat1, resultat2):
     """vérifie si resultat1 est meilleur que resultat2 au sens des taux de réussites
@@ -24,8 +26,10 @@ def meilleur(resultat1, resultat2):
     Returns:
         bool:   True si le taux de réussite de resultat1 est supérieur ā celui de resultat2
     """
+    if not resultat1 or not resultat2 :
+        return None
    
-    return taux_reussite(resultat1) > taux_reussite(resultat2)
+    return taux_reussite(resultat1) > taux_reussite(resultat2) 
 
 def meilleur_taux_reussite(liste_resultats):
     """recherche le meilleur taux de réussite dans une liste de résultats
@@ -65,8 +69,6 @@ def pire_taux_reussite(liste_resultats):
             pireTaux = elem
     return taux_reussite(pireTaux)
     
-
-
 def total_admis_presents(liste_resultats):
     """calcule le nombre total de candidats admis et de candidats présents aux épreuves du DNB parmi les résultats de la liste passée en paramètre
 
@@ -83,7 +85,6 @@ def total_admis_presents(liste_resultats):
         nompbre_present += liste_resultats[i][3]
     return (nombre_totale,nompbre_present)
 
-
 def filtre_session(liste_resultats, session):
     """génère la sous-liste de liste_resultats, restreinte aux résultats de la session demandée
 
@@ -99,10 +100,6 @@ def filtre_session(liste_resultats, session):
         if liste_resultats[i][0] == session:
             sous_liste.append(liste_resultats[i])
     return sous_liste
-
-
-
-
 
 def filtre_departement(liste_resultats, departement):
     """génère la sous-liste de liste_resultats, restreinte aux résultats du département demandé
@@ -178,10 +175,10 @@ def moyenne_taux_reussite_college(liste_resultats, nom, departement):
     Returns:
         float: moyenne des taux de rēussite d'un collège sur l'ensemble des sessions
     """
-    total_ad = 0
-    total_present = 0
-    nombre_session = 0
-    total_pourcentage = 0
+    total_ad = 0.0
+    total_present = 0.0
+    nombre_session = 0.0
+    total_pourcentage = 0.0
 
     for i in range(len(liste_resultats)):
         nom_College = liste_resultats[i][1]

@@ -7,11 +7,16 @@ import explore_dnb as dnb
 def test_taux_reussite():
     assert dnb.taux_reussite(resultat1) == 67/71*100
     assert dnb.taux_reussite(resultat2) == 78/98*100
+    assert dnb.taux_reussite(resultat3) == 109/115*100
+    assert dnb.taux_reussite(liste1[0]) == 118/134*100
+    assert dnb.taux_reussite(resultat4) == None
            
            
 def test_meilleur():
     assert dnb.meilleur(resultat1, resultat2) == True
     assert dnb.meilleur(resultat1, resultat3) == False
+    assert dnb.meilleur(resultat2, resultat3) == False
+    assert dnb.meilleur(resultat1, resultat4) == None
 
 
 def test_meilleur_taux_reussite():
@@ -86,6 +91,7 @@ def test_fusionner_resultats():
 resultat1 = (2008, "JEANNE D'ARC", 45, 71, 67)
 resultat2 = (2012, "ALBERT SIDOISNE", 28, 98, 78)
 resultat3 = (2016, "JEAN MONNET", 37, 115, 109)
+resultat4 =  ()
 
 # exemples de listes de résultats
 liste1 = [(2020, 'ALBERT SIDOISNE', 28, 134, 118),
