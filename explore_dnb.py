@@ -46,8 +46,6 @@ def meilleur_taux_reussite(liste_resultats):
             meilleurTaux = elem
     return taux_reussite(meilleurTaux)
 
-
-
 def pire_taux_reussite(liste_resultats):
     """recherche le pire taux de réussite parmi une liste de résultats
 
@@ -57,12 +55,15 @@ def pire_taux_reussite(liste_resultats):
     Returns:
         float: le pire taux de rēussite
     """
-    pire = (liste_resultats[0][4]/ liste_resultats[0][3])*100
-    for i in range(len(liste_resultats)):
-        taux = (liste_resultats[i][4]/ liste_resultats[i][3])*100
-        if taux < pire :
-            pire = taux
-    return pire
+    if liste_resultats == []:
+        return None
+    
+    pireTaux = liste_resultats[0]
+
+    for elem in liste_resultats:
+        if meilleur(pireTaux,elem):
+            pireTaux = elem
+    return taux_reussite(pireTaux)
     
 
 
