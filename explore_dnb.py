@@ -262,7 +262,35 @@ def plus_longe_periode_amelioration(liste_resultats):
     Returns:
         tuple: un couple contenant la session (année) de début de la période et la session de fin de la pēriode
     """
-    pass
+    liste_Triee = liste_sessions(liste_resultats)
+    longueur_max = 1
+    longueur_courante = 1
+    debut_courant = liste_Triee[0]
+    meilleur_debut = liste_Triee[0]
+    meilleur_fin = liste_Triee[0]
+
+    for i in range(1, len(liste_Triee)):
+        taux_precedent = taux_reussite_global(liste_resultats, liste_Triee[i-1])
+        taux_actualite = taux_reussite_global(liste_resultats, liste_Triee[i])
+        if taux_actualite > taux_precedent :
+            longueur_courante += 1
+            if longueur_courante > longueur_max :
+                longueur_max = longueur_courante
+                meilleur_debut = debut_courant
+                meilleur_fin = liste_Triee[i]
+        else:
+            longueur_courante = 1 
+            debut_courant = liste_Triee[i]
+    return (meilleur_debut, meilleur_fin)
+
+
+
+
+
+        
+        
+
+
 
 def est_bien_triee(liste_resultats):
     """vérifie qu'une liste de résultats est bien triée dans l'ordre chronologique des sessions puis dans l'ordre croissant des départements puis dans l'ordre alphabétique des noms de collèges
