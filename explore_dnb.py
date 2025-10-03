@@ -118,7 +118,6 @@ def filtre_departement(liste_resultats, departement):
 
     return sous_liste
 
-
 def filtre_college(liste_resultats, nom, departement):
     """génère la sous-liste de liste_resultats, restreinte aux résultats du département donné et dont le nom du collège contient le nom passé en paramètre (en minuscule ou majuscule)
 
@@ -157,12 +156,10 @@ def taux_reussite_global(liste_resultats, session):
         if liste_resultats[i][0] == session:
             total_ad += liste_resultats[i][4]
             total_present += liste_resultats[i][3]
-        else :
-              return None
+        elif total_present == 0: 
+            return None
      
     return total_ad / total_present * 100 
-
-
 
 def moyenne_taux_reussite_college(liste_resultats, nom, departement):
     """calcule la moyenne des taux de réussite d'un collège sur l'ensemble des sessions
@@ -191,8 +188,7 @@ def moyenne_taux_reussite_college(liste_resultats, nom, departement):
 
         
     return total_pourcentage / nombre_session
-        
-     
+           
 liste2 = [(2020, 'ALBERT SIDOISNE', 28, 134, 118),
           (2020, 'ANATOLE FRANCE', 28, 63, 47),
           (2020, 'DE NERMONT - CHATEAUDUN', 28, 74, 60),
@@ -217,32 +213,28 @@ def meilleur_college(liste_resultats, session):
     Args:
         liste_resultats (list): une liste de résultats
         session (int) : une session (année)
-        
+
     Returns:
         tuple: couple contenant le nom du collège et le dēpartement
     """
-    meilleurTaux = -1
+    meilleurTaux = 0
     meilleurNom = None
     meilleurDep = None
 
     for i in range(len(liste_resultats)):
-        if liste_resultats[i][0] == session:
-            nom = liste_resultats[i][1]
-            depart = liste_resultats[i][2]
-            present = liste_resultats[i][3]
-            admis = liste_resultats[i][4]
-            tauxReussite = (admis / present) * 100
-            if tauxReussite > meilleurTaux:
-                meilleurTaux = tauxReussite
-                meilleurNom = nom
-                meilleurDep = depart
+        res = liste_resultats[i]
+        if res[0] == session:
+            nom = res[1]
+            depart = res[2]
+            tauxDeReussite = taux_reussite(res)
+            if tauxDeReussite > meilleurTaux:
+                meilleurTaux = tauxDeReussite
+                meilleurNom  = nom
+                meilleurDep  = depart
     if meilleurNom is None :
-        if meilleurDep is None :
-            return None
+        return None
     return meilleurNom , meilleurDep
 print(meilleur_college(liste2,2021))
-
-
 
 def liste_sessions(liste_resultats):
     """retourne la liste des sessions (années) dont au moins un résultat est reporté dans la liste de résultats.
@@ -253,9 +245,13 @@ def liste_sessions(liste_resultats):
 
     Returns:
         list: une liste de session (int) triēe et sans doublons
-    """    
-     
-
+    """
+    liste_session = []
+    for i in range(len(liste_resultats))  :
+        if liste_resultats[i][0] not in liste_session :
+            liste_session.append(liste_resultats[i][0])
+    liste_session.sort()
+    return liste_session
 
 def plus_longe_periode_amelioration(liste_resultats):
     """recherche la plus longue periode d'amélioration du taux de réussite global au DNB
@@ -265,7 +261,7 @@ def plus_longe_periode_amelioration(liste_resultats):
 
     Returns:
         tuple: un couple contenant la session (année) de début de la période et la session de fin de la pēriode
-    """    
+    """
     pass
 
 def est_bien_triee(liste_resultats):

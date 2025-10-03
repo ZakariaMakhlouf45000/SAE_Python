@@ -24,11 +24,15 @@ def test_meilleur_taux_reussite():
     assert dnb.meilleur_taux_reussite(liste3) == 1.0*100
     assert dnb.meilleur_taux_reussite([]) == None
     assert dnb.meilleur_taux_reussite(liste4) == 109/115*100
+    assert dnb.meilleur_taux_reussite(([(), ()])) == None
 
 
 def test_pire_taux_reussite():
     assert dnb.pire_taux_reussite(liste1) == 47/63*100
     assert dnb.pire_taux_reussite(liste2) == 15/24*100
+    assert dnb.pire_taux_reussite([]) == None
+    assert dnb.pire_taux_reussite(([(), ()])) == None
+
 
 
 def test_total_admis_presents():
@@ -54,6 +58,7 @@ def test_filtre_college():
 def test_taux_reussite_global():
     assert dnb.taux_reussite_global(liste1, 2018) == None
     assert dnb.taux_reussite_global(liste1, 2020) == 476/576*100
+    
 
 
 def test_moyenne_taux_reussite_college():
@@ -303,7 +308,7 @@ liste5 = [(2006, 'AUGUSTE AYMARD', 45, 24, 12),
           (2008, 'LAURENT EYNAC', 45, 37, 33), 
           (2008, 'LE MONTEIL', 45, 96, 83), 
           (2008, 'LE SACRE COEUR', 45, 64, 61), 
-          (2008, 'LPO ANNE-MARIE MARTEL', 45, 24, 23), 
+          (2008, 'LPO ANNE-MARIE     MARTEL', 45, 24, 23), 
           (2008, 'NOTRE DAME', 45, 29, 22), 
           (2008, 'NOTRE DAME DE LA FAYE', 45, 48, 47), 
           (2008, 'NOTRE DAME DU CHATEAU', 45, 147, 132), 
