@@ -111,6 +111,8 @@ def filtre_departement(liste_resultats, departement):
     Returns:
         list: la sous-liste de liste_resultats, restreinte aux résultats du dēpartement demandé
     """
+    if liste_resultats == 0:
+        return None
     sous_liste = []
     for i in range(len(liste_resultats)):
         if liste_resultats[i][2] == departement:
@@ -156,7 +158,7 @@ def taux_reussite_global(liste_resultats, session):
         if liste_resultats[i][0] == session:
             total_ad += liste_resultats[i][4]
             total_present += liste_resultats[i][3]
-        elif total_present == 0: 
+    if total_present == 0: 
             return None
      
     return total_ad / total_present * 100 
@@ -263,34 +265,40 @@ def plus_longe_periode_amelioration(liste_resultats):
         tuple: un couple contenant la session (année) de début de la période et la session de fin de la pēriode
     """
     liste_Triee = liste_sessions(liste_resultats)
+
+    if len(liste_Triee) == 0:
+        return None
+    
     longueur_max = 1
     longueur_courante = 1
-    debut_courant = liste_Triee[0]
+
+    debut = liste_Triee[0]
+
     meilleur_debut = liste_Triee[0]
     meilleur_fin = liste_Triee[0]
 
     for i in range(1, len(liste_Triee)):
         taux_precedent = taux_reussite_global(liste_resultats, liste_Triee[i-1])
         taux_actualite = taux_reussite_global(liste_resultats, liste_Triee[i])
-        if taux_actualite > taux_precedent :
-            longueur_courante += 1
-            if longueur_courante > longueur_max :
-                longueur_max = longueur_courante
-                meilleur_debut = debut_courant
-                meilleur_fin = liste_Triee[i]
+
+
+        if taux_actualite > taux_precedent:
+                longueur_courante += 1
         else:
-            longueur_courante = 1 
-            debut_courant = liste_Triee[i]
+                if longueur_courante > longueur_max :
+                    longueur_max = longueur_courante
+                    meilleur_debut = debut
+                    meilleur_fin = liste_Triee[i- 1]                               
+                                                              
+                longueur_courante = 1                                           
+                debut= liste_Triee[i] 
+    if longueur_courante > longueur_max :
+        longueur_max = longueur_courante
+        meilleur_debut = debut
+        meilleur_fin = liste_Triee[-1]
+
+
     return (meilleur_debut, meilleur_fin)
-
-
-
-
-
-        
-        
-
-
 
 def est_bien_triee(liste_resultats):
     """vérifie qu'une liste de résultats est bien triée dans l'ordre chronologique des sessions puis dans l'ordre croissant des départements puis dans l'ordre alphabétique des noms de collèges

@@ -78,6 +78,7 @@ def test_liste_sessions():
 def test_plus_longue_periode_amelioration():
     assert dnb.plus_longe_periode_amelioration(liste5) == (2013, 2017)
     assert dnb.plus_longe_periode_amelioration(liste1) == (2020, 2020)
+    assert dnb.plus_longe_periode_amelioration([]) == None
 
 
 def test_est_bien_triee():
